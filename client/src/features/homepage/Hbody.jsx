@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Chatbot = () => {
+const Hbody = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
 
@@ -15,7 +15,7 @@ const Chatbot = () => {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-lg bg-white rounded-lg shadow-md overflow-hidden">
         <div className="p-4 border-b">
-          <h2 className="text-xl font-semibold text-gray-800">Chatbot</h2>
+          <h2 className="text-xl font-semibold text-gray-800">Hbody</h2>
         </div>
         <div className="flex flex-col p-4 space-y-4 h-80 overflow-y-auto">
           {messages.map((message, index) => (
@@ -53,4 +53,4 @@ const Chatbot = () => {
   );
 };
 
-export default Chatbot;
+export default Hbody;
