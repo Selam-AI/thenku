@@ -1,20 +1,17 @@
-import React from 'react'
-import Hnavbar from './features/homepage/Hnavbar';
-import Hbody from './features/homepage/Hbody';
-import Dbody from './features/delve/Dbody';
+/** @format */
+
+import React from "react";
+import Hnavbar from "./features/homepage/Hnavbar";
+import Hbody from "./features/homepage/Hbody";
 
 function App() {
   return (
     <>
+      <Hnavbar />
 
-<Hnavbar/>
-
-
-<Hbody/>
-
-
+      <Hbody />
     </>
   );
 }
 
-export default App
+export default App;
