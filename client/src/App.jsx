@@ -1,14 +1,17 @@
 import React from "react";
-
-import Hnavbar from "./features/homepage/Hnavbar";
-import Hbody from "./features/homepage/Hbody";
+import { Routes, Route } from "react-router-dom";
+import Homepage from "./features/homepage/Homepage";
+import Register from "./authpages/Register";
+import Login from "./authpages/Login";
 
 function App() {
   return (
     <>
-      <Hnavbar />
-
-      <Hbody />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/Register" element={<Register />} />
+        <Route path="/Login" element={<Login />} />
+      </Routes>
     </>
   );
 }
