@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React, { useState } from "react";
 import {
   FaVideo,
@@ -9,7 +10,10 @@ import {
   FaUserFriends,
   FaUserPlus,
   FaUserClock,
+  FaComment,
+  FaFileAlt,
 } from "react-icons/fa";
+
 
 function Hnavbar() {
   const [isChecked, setIsChecked] = useState(false);
@@ -92,6 +96,18 @@ function Hnavbar() {
       gradient: "linear-gradient(135deg, #f1f8e9, #dcedc8)",
       icon: <FaHandHoldingHeart />,
     },
+    {
+      title: "About Us",
+      text: "We connect people to essential services, information, and community, ensuring inclusivity for all.",
+      gradient: "linear-gradient(135deg, #f1f8e9, #dcedc8)",
+      icon: <FaFileAlt />,
+    },
+    {
+      title: "Contact Us",
+      text: "Contact us for feedback or assistance of any problems using the Thenku platform.",
+      gradient: "linear-gradient(135deg, #f1f8e9, #dcedc8)",
+      icon: <FaComment />,
+    },
   ];
 
   return (
@@ -121,11 +137,12 @@ function Hnavbar() {
 
 
  {/* Sign Up button */}
+ <Link to="/Login">
         <button className="btn bg-base-200 flex items-center gap-2">
   <FaUserPlus className="text-lg" />
-  <span className="hidden md:inline">Sign Up</span>
+  <span className="hidden md:inline">Sign In</span>
 </button>
-
+</Link>
       </nav>
 
       {/* Dropdown Section */}
@@ -133,7 +150,9 @@ function Hnavbar() {
         className={`dropdown-content absolute top-full left-0 w-full bg-base-200 p-6 shadow-lg z-50 transition-all duration-500 ease-in-out ${
           isChecked ? "opacity-100 max-h-screen" : "opacity-0 max-h-0"
         }`}
-        style={{ overflow: "hidden" }}
+
+        // hiden dropdown
+        // style={{ overflow: "hidden" }}
       >
         <div className="flex flex-wrap justify-center gap-4">
           {/* Render Cards */}
