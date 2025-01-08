@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import {
   FaVideo,
@@ -14,7 +14,6 @@ import {
   FaFileAlt,
 } from "react-icons/fa";
 
-
 function Hnavbar() {
   const [isChecked, setIsChecked] = useState(false);
 
@@ -26,7 +25,7 @@ function Hnavbar() {
     <div
       className="card bg-base-100 shadow-xl transition-transform transform hover:scale-105"
       style={{
-        width: "18rem",
+        width: "17rem",
         height: "20rem",
         display: "flex",
         flexDirection: "column",
@@ -48,12 +47,19 @@ function Hnavbar() {
           zIndex: 0,
         }}
       />
-      <div className="card-body p-4" style={{ height: "100%", position: "relative", zIndex: 1 }}>
-        <div className="icon-container text-center mb-4 text-4xl text-bold">{icon}</div>
-        <h2 className="card-title text-center text-3xl font-bold mb-2">{title}</h2>
-        <p className="text-m text-justify mb-4">{text}</p>
+      <div
+        className="card-body p-4"
+        style={{ height: "100%", position: "relative", zIndex: 1 }}
+      >
+        <div className="icon-container text-center mb-1 text-4xl text-bold">
+          {icon}
+        </div>
+        <h2 className="card-title text-center text-3xl font-bold mb-1">
+          {title}
+        </h2>
+        <p className="text-m text-justify mb-2">{text}</p>
         <div className="card-actions justify-center">
-          <button className="btn btn-outline">Explore</button>
+          <button className="btn btn-outline m-2">Explore</button>
         </div>
       </div>
     </div>
@@ -114,35 +120,43 @@ function Hnavbar() {
     <div className="relative">
       {/* Navbar */}
       <nav className="bg-base-200 px-4 py-2 shadow-md flex justify-between items-center">
-        <button onClick={handleChange} className="btn text-base md:text-2xl font-extrabold">
+        <button
+          onClick={handleChange}
+          className="btn text-base md:text-2xl font-extrabold"
+        >
           {isChecked ? "DIRECT CHAT" : "AT A GLANCE"}
         </button>
 
-      {/* Searchbar */}
-      <div className="w-40 md:w-80">
-<label className="input input-bordered flex items-center gap-2">
-  <input type="text" className="flex-grow w-24 md:w-40" placeholder="Search" />
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 16 16"
-    fill="currentColor"
-    className="h-4 w-4 opacity-70">
-    <path
-      fillRule="evenodd"
-      d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-      clipRule="evenodd" />
-  </svg>
-</label>
-</div>
+        {/* Searchbar */}
+        <div className="w-40 md:w-80">
+          <label className="input input-bordered flex items-center gap-2">
+            <input
+              type="text"
+              className="flex-grow w-24 md:w-40"
+              placeholder="Search"
+            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="h-4 w-4 opacity-70"
+            >
+              <path
+                fillRule="evenodd"
+                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </label>
+        </div>
 
-
- {/* Sign Up button */}
- <Link to="/Login">
-        <button className="btn bg-base-200 flex items-center gap-2">
-  <FaUserPlus className="text-lg" />
-  <span className="hidden md:inline">Sign In</span>
-</button>
-</Link>
+        {/* Sign Up button */}
+        <Link to="/Login">
+          <button className="btn bg-base-200 flex items-center gap-2">
+            <FaUserPlus className="text-lg" />
+            <span className="hidden md:inline">Sign In</span>
+          </button>
+        </Link>
       </nav>
 
       {/* Dropdown Section */}
