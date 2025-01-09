@@ -69,49 +69,49 @@ function Hnavbar() {
     {
       title: "Consultations",
       text: "Engage with professionals for tailored consultations, including text, audio, and video formats, to address your specific requirements.",
-      gradient: "linear-gradient(135deg, #e0f7fa, #b2ebf2)",
+      gradient: "linear-gradient(135deg, #a8edea, #fed6e3)",
       icon: <FaUserClock />,
     },
     {
       title: "Utility",
       text: "Discover reliable utility service providers offering comprehensive solutions to meet your everyday necessities.",
-      gradient: "linear-gradient(135deg, #fff3e0, #ffe0b2)",
+      gradient: "linear-gradient(135deg, #fce2ce, #f7c9d8)",
       icon: <FaWrench />,
     },
     {
       title: "Delve",
       text: "Get connected to people based on psychological profiles and expected characteristics.",
-      gradient: "linear-gradient(135deg, #e8f5e9, #c8e6c9)",
+      gradient: "linear-gradient(135deg, #e0c3fc, #8ec5fc)",
       icon: <FaUsers />,
     },
     {
       title: "Shop",
       text: "Experience an exceptional shopping journey with authentic and high-quality products.",
-      gradient: "linear-gradient(135deg, #fce4ec, #f8bbd0)",
+      gradient: "linear-gradient(135deg, #fbc2eb, #a6c1ee)",
       icon: <FaShoppingBag />,
     },
     {
       title: "News",
       text: "Stay informed with the latest developments, featuring curated news and updates personalized to your interests.",
-      gradient: "linear-gradient(135deg, #e3f2fd, #bbdefb)",
+      gradient: "linear-gradient(135deg, #84fab0, #8fd3f4)",
       icon: <FaRegNewspaper />,
     },
     {
       title: "Foundation",
       text: "Empowering underprivileged individuals to access the services above, ensuring inclusivity and equal opportunities.",
-      gradient: "linear-gradient(135deg, #f1f8e9, #dcedc8)",
+      gradient: "linear-gradient(135deg, #ffecd2, #fcb69f)",
       icon: <FaHandHoldingHeart />,
     },
     {
       title: "About Us",
       text: "We connect people to essential services, information, and community, ensuring inclusivity for all.",
-      gradient: "linear-gradient(135deg, #f1f8e9, #dcedc8)",
+      gradient: "linear-gradient(135deg, #f5f7fa, #c3cfe2)",
       icon: <FaFileAlt />,
     },
     {
       title: "Contact Us",
       text: "Contact us for feedback or assistance of any problems using the Thenku platform.",
-      gradient: "linear-gradient(135deg, #f1f8e9, #dcedc8)",
+      gradient: "linear-gradient(135deg, #c1dfc4, #deecdd)",
       icon: <FaComment />,
     },
   ];
@@ -160,27 +160,42 @@ function Hnavbar() {
       </nav>
 
       {/* Dropdown Section */}
-      <div
-        className={`dropdown-content absolute top-full left-0 w-full bg-base-200 p-6 shadow-lg z-50 transition-all duration-500 ease-in-out ${
-          isChecked ? "opacity-100 max-h-screen" : "opacity-0 max-h-0"
-        }`}
+      {isChecked && (
+        <div className="dropdown-content absolute top-full left-0 w-full bg-base-200 p-6 shadow-lg z-50">
+          <div className="flex flex-wrap justify-center gap-4">
+            {cardData.map((card, index) => (
+              <Card
+                key={index}
+                title={card.title}
+                text={card.text}
+                gradient={card.gradient}
+                icon={card.icon}
+              />
+            ))}
 
-        // hiden dropdown
-        // style={{ overflow: "hidden" }}
-      >
-        <div className="flex flex-wrap justify-center gap-4">
-          {/* Render Cards */}
-          {cardData.map((card, index) => (
-            <Card
-              key={index}
-              title={card.title}
-              text={card.text}
-              gradient={card.gradient}
-              icon={card.icon}
-            />
-          ))}
+            <button
+              onClick={handleChange}
+              className="btn btn-square m-20"
+              style={{ width: "80px", height: "80px" }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-16 w-16"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
