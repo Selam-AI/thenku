@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"; // Replace require with import
 import Cards from "../../components/Cards"; // Replace require with import
-import axios from "axios"; // Replace require with import
 import { Link } from "react-router-dom"; // Replace require with import
 
 function Sbody() {
@@ -9,13 +8,19 @@ function Sbody() {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await axios.get("/shop");
+        const res = await fetch("http://localhost:8080/api/v1/shop/products");
+
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        const data = await res.json();
 
         // Check if the response is an array
-        if (Array.isArray(res.data)) {
-          setProducts(res.data);
+        if (Array.isArray(data)) {
+          setProducts(data);
         } else {
-          console.error("Products data is not an array:", res.data);
+          console.error("Products data is not an array:", data);
           setProducts([]); // Fallback to empty array
         }
       } catch (error) {

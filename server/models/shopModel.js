@@ -8,6 +8,6 @@ const productSchema = new mongoose.Schema({
   description: { type: String, default: "No description provided." },
 });
 
-const Product = mongoose.model("Product", productSchema);
+const Product = mongoose.model("Product", productSchema); // Correct name
 
-module.exports = Product;
+module.exports = Product; // Consistent export

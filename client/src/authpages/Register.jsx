@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
-import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -16,16 +15,36 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/v1/auth/register", { username, email, password });
-      toast.success("User Registered Successfully");
-      navigate("/login");
-    } catch (err) {
-      console.log(err);
-      if (err.response?.data?.error) {
-        setError(err.response.data.error);
-      } else if (err.message) {
-        setError(err.message);
+      const response = await fetch(
+        "http://localhost:8080/api/v1/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            email,
+            password,
+          }),
+        },
+      );
+
+      if (response.ok) {
+        // Successful registration
+        toast.success("User Registered Successfully");
+        navigate("/login");
+      } else {
+        // Handle errors
+        const data = await response.json();
+        setError(data.error || "Registration failed. Please try again.");
       }
+    } catch (err) {
+      // Handle fetch errors
+      console.error(err);
+      setError("Something went wrong. Please try again later.");
+    } finally {
+      // Clear error after 5 seconds
       setTimeout(() => {
         setError("");
       }, 5000);
@@ -34,43 +53,43 @@ const Register = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      {/* Toaster Component */}
+      <Toaster position="top-right" reverseOrder={false} />
       <div className="w-full max-w-sm md:max-w-md lg:max-w-lg p-6 md:p-8 bg-white shadow-lg rounded-lg">
         {error && (
-          <div className="mb-4 bg-red-500 text-white p-3 rounded">
-            {error}
-          </div>
+          <div className="mb-4 bg-red-500 text-white p-3 rounded">{error}</div>
         )}
         <form onSubmit={handleSubmit}>
           <h3 className="text-2xl md:text-3xl font-bold text-center mb-6">
             Sign Up
           </h3>
           <input
-  type="text"
-  placeholder="Username"
-  autoComplete="username"
-  className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-  required
-  value={username}
-  onChange={(e) => setUsername(e.target.value)}
-/>
-<input
-  type="email"
-  placeholder="Email"
-  autoComplete="email"
-  className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-  required
-  value={email}
-  onChange={(e) => setEmail(e.target.value)}
-/>
-<input
-  type="password"
-  placeholder="Password"
-  autoComplete="current-password"
-  className="w-full p-3 mb-6 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-  required
-  value={password}
-  onChange={(e) => setPassword(e.target.value)}
-/>
+            type="text"
+            placeholder="Username"
+            autoComplete="username"
+            className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            autoComplete="email"
+            className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            autoComplete="current-password"
+            className="w-full p-3 mb-6 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
           <button
             type="submit"

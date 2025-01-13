@@ -59,7 +59,9 @@ function Hnavbar() {
         </h2>
         <p className="text-m text-justify mb-2">{text}</p>
         <div className="card-actions justify-center">
-        <Link to="/shop"><button className="btn btn-outline m-2">Explore</button></Link>
+          <Link to="/shop">
+            <button className="btn btn-outline m-2">Explore</button>
+          </Link>
         </div>
       </div>
     </div>

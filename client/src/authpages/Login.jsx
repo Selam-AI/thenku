@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,17 +14,25 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/api/v1/auth/login", { email, password });
+      const res = await fetch("http://localhost:8080/api/v1/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Login failed");
+      }
+
       toast.success("Login Successfully");
       localStorage.setItem("authToken", true);
       navigate("/");
     } catch (err) {
       console.log(err);
-      if (err.response?.data?.error) {
-        setError(err.response.data.error);
-      } else if (err.message) {
-        setError(err.message);
-      }
+      setError(err.message);
       setTimeout(() => {
         setError("");
       }, 5000);
@@ -36,12 +43,12 @@ const Login = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-sm md:max-w-md lg:max-w-lg p-6 md:p-8 bg-white shadow-lg rounded-lg">
         {error && (
-          <div className="mb-4 bg-red-500 text-white p-3 rounded">
-            {error}
-          </div>
+          <div className="mb-4 bg-red-500 text-white p-3 rounded">{error}</div>
         )}
         <form onSubmit={handleSubmit}>
-          <h3 className="text-2xl md:text-3xl font-bold text-center mb-6">Sign In</h3>
+          <h3 className="text-2xl md:text-3xl font-bold text-center mb-6">
+            Sign In
+          </h3>
           <input
             type="email"
             placeholder="Email"
