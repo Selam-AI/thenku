@@ -67,10 +67,10 @@ const Hbody = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-lg bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="flex flex-col items-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-lg bg-white rounded-lg shadow-md overflow-hidden my-6">
         <div className="p-4 border-b">
-          <h2 className="text-xl font-semibold text-gray-800">Chatbot</h2>
+          <h2 className="text-xl font-semibold text-gray-800">Problem?</h2>
         </div>
         <div className="flex flex-col p-4 space-y-4 h-80 overflow-y-auto">
           {messages.map((message, index) => (
@@ -94,7 +94,7 @@ const Hbody = () => {
           {loading && (
             <div className="flex justify-start">
               <div className="p-2 rounded-lg bg-gray-200 text-gray-800">
-                Loading...
+                Let me tell you...
               </div>
             </div>
           )}
@@ -105,13 +105,13 @@ const Hbody = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="flex-grow p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Type your message..."
+            className="flex-grow p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-bg-base-200"
+            placeholder="Tell me here..."
             disabled={loading}
           />
           <button
             onClick={handleSendMessage}
-            className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center"
+            className="ml-2 bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded flex items-center justify-center"
             disabled={loading}
           >
             <svg

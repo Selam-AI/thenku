@@ -29,6 +29,8 @@ const PORT = process.env.PORT || 8080;
 
 //API routes
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/huggingface", require("./routes/chatbotRoutes"));
+app.use("/api/v1/shop", require("./routes/shopRoutes"));
 
 //listen server
 app.listen(8080, () => {

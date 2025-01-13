@@ -59,7 +59,7 @@ function Hnavbar() {
         </h2>
         <p className="text-m text-justify mb-2">{text}</p>
         <div className="card-actions justify-center">
-          <button className="btn btn-outline m-2">Explore</button>
+        <Link to="/shop"><button className="btn btn-outline m-2">Explore</button></Link>
         </div>
       </div>
     </div>
@@ -119,7 +119,7 @@ function Hnavbar() {
   return (
     <div className="relative">
       {/* Navbar */}
-      <nav className="bg-base-200 px-4 py-2 shadow-md flex justify-between items-center">
+      <nav className="bg-base-300 px-4 py-2 shadow-md flex justify-between items-center">
         <button
           onClick={handleChange}
           className="btn text-base md:text-2xl font-extrabold"
@@ -152,9 +152,9 @@ function Hnavbar() {
 
         {/* Sign Up button */}
         <Link to="/Login">
-          <button className="btn bg-base-200 flex items-center gap-2">
+          <button className="btn bg-base-300 flex items-center gap-2">
             <FaUserPlus className="text-lg" />
-            <span className="hidden md:inline">Sign In</span>
+            <span className="hidden md:inline">Log In</span>
           </button>
         </Link>
       </nav>

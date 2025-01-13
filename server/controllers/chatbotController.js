@@ -1,4 +1,7 @@
 // Query Function
+const dotenv = require("dotenv");
+dotenv.config();
+
 const query = async (data) => {
   const response = await fetch(
     "https://api-inference.huggingface.co/models/bigscience/bloom",
@@ -27,7 +30,7 @@ exports.chatbotController = async (req, res) => {
     // Prepare query
     const userInput = `User: ${text.trim()}\nThenku:`;
     const data = await query({
-      inputs: `You are Thenku, a helpful assistant for a marketplace. Respond concisely and directly to user queries.\n${userInput}`,
+      inputs: `You are Thenku, a helpful assistant for a marketplace. You help users navigate consultations, utility services, matchmaking, shopping, news, and foundation support. Respond accurately and concisely, while being empathetic, helpful, and user-friendly.\n${userInput}`,
     });
 
     // Process response
