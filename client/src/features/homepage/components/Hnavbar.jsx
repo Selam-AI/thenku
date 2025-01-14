@@ -1,5 +1,6 @@
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {
@@ -16,14 +17,24 @@ import {
   FaFileAlt,
 } from "react-icons/fa";
 
-
-
-
 function Hnavbar() {
   const navigate = useNavigate();
   const loggedIn = JSON.parse(localStorage.getItem("authToken"));
   const [isChecked, setIsChecked] = useState(false);
-
+  const [sticky, setSticky] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setSticky(true);
+      } else {
+        setSticky(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   const handleChange = () => {
     setIsChecked(!isChecked);
   };
@@ -35,7 +46,7 @@ function Hnavbar() {
           "Content-Type": "application/json",
         },
       });
-  
+
       if (response.ok) {
         localStorage.removeItem("authToken");
         toast.success("Logout successfully");
@@ -47,7 +58,7 @@ function Hnavbar() {
       console.log(error);
     }
   };
-  
+
   const Card = ({ title, text, gradient, icon }) => (
     <div
       className="card bg-base-100 shadow-xl transition-transform transform hover:scale-105"
@@ -146,7 +157,7 @@ function Hnavbar() {
   ];
 
   return (
-    <div className="relative">
+    <div className=" fixed top-0 w-full">
       {/* Navbar */}
       <nav className="bg-base-300 px-4 py-2 shadow-md flex justify-between items-center">
         <button
@@ -180,25 +191,28 @@ function Hnavbar() {
         </div>
 
         {/* Sign Up button */}
-        {loggedIn ? (
-        <>
-          <NavLink to="/" className=" btn md:text-xl font-bold">
-            Home
-          </NavLink>
-          <NavLink to="/login" onClick={handleLogout} className=" btn md:text-xl font-bold">
-            Logout
-          </NavLink>
-        </>
-      ) : (
-        <>
-          <NavLink to="/register" className="btn md:text-xl font-bold">
-            Sign Up
-          </NavLink>
-          <NavLink to="/login" className="btn md:text-xl font-bold">
-            Sign In
-          </NavLink>
-        </>
-      )}
+        <div>
+          {loggedIn ? (
+            <>
+              <NavLink
+                to="/login"
+                onClick={handleLogout}
+                className=" btn md:text-xl font-bold"
+              >
+                Logout
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink to="/register" className="btn md:text-xl font-bold mr-2">
+                Sign Up
+              </NavLink>
+              <NavLink to="/login" className="btn md:text-xl font-bold">
+                Sign In
+              </NavLink>
+            </>
+          )}
+        </div>
       </nav>
 
       {/* Dropdown Section */}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 // Query function to interact with Hugging Face API
 const queryAPI = async (data) => {
@@ -67,12 +68,12 @@ const Hbody = () => {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-100">
+    <div className="mt-16 flex flex-col items-center min-h-screen bg-gray-100">
       <div className="w-full max-w-lg bg-white rounded-lg shadow-md overflow-hidden my-6">
         <div className="p-4 border-b">
           <h2 className="text-xl font-semibold text-gray-800">Problem?</h2>
         </div>
-        <div className="flex flex-col p-4 space-y-4 h-80 overflow-y-auto">
+        <div className="flex flex-col p-4 space-y-4 h-96 overflow-y-auto">
           {messages.map((message, index) => (
             <div
               key={index}
