@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   FaVideo,
   FaWrench,
@@ -14,13 +16,38 @@ import {
   FaFileAlt,
 } from "react-icons/fa";
 
+
+
+
 function Hnavbar() {
+  const navigate = useNavigate();
+  const loggedIn = JSON.parse(localStorage.getItem("authToken"));
   const [isChecked, setIsChecked] = useState(false);
 
   const handleChange = () => {
     setIsChecked(!isChecked);
   };
-
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (response.ok) {
+        localStorage.removeItem("authToken");
+        toast.success("Logout successfully");
+        navigate("/login");
+      } else {
+        console.error("Failed to logout:", response.statusText);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
   const Card = ({ title, text, gradient, icon }) => (
     <div
       className="card bg-base-100 shadow-xl transition-transform transform hover:scale-105"
@@ -153,12 +180,25 @@ function Hnavbar() {
         </div>
 
         {/* Sign Up button */}
-        <Link to="/Login">
-          <button className="btn bg-base-300 flex items-center gap-2">
-            <FaUserPlus className="text-lg" />
-            <span className="hidden md:inline">Log In</span>
-          </button>
-        </Link>
+        {loggedIn ? (
+        <>
+          <NavLink to="/" className=" btn md:text-xl font-bold">
+            Home
+          </NavLink>
+          <NavLink to="/login" onClick={handleLogout} className=" btn md:text-xl font-bold">
+            Logout
+          </NavLink>
+        </>
+      ) : (
+        <>
+          <NavLink to="/register" className="btn md:text-xl font-bold">
+            Sign Up
+          </NavLink>
+          <NavLink to="/login" className="btn md:text-xl font-bold">
+            Sign In
+          </NavLink>
+        </>
+      )}
       </nav>
 
       {/* Dropdown Section */}
