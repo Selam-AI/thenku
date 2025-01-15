@@ -157,9 +157,14 @@ function Hnavbar() {
   ];
 
   return (
-    <div className=" fixed top-0 w-full">
+    <div className={` fixed top-0 w-full bg-gray-300 ${
+          sticky
+            ? "shadow-md bg-gray-500 dark:bg-slate-700 dark:text-white duration-300 transition-all ease-in-out"
+            : ""
+        }`}
+      >
       {/* Navbar */}
-      <nav className="bg-base-300 px-4 py-2 shadow-md flex justify-between items-center">
+      <nav className=" px-4 py-2 shadow-md flex justify-between items-center">
         <button
           onClick={handleChange}
           className="btn text-base md:text-2xl font-extrabold"
